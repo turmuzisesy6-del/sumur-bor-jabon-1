@@ -80,8 +80,8 @@ function Login() {
                   placeholder="••••••" className="pl-9" required />
               </div>
             </div>
-            <Button type="submit" className="w-full bg-gradient-primary shadow-elegant" size="lg">
-              Masuk
+            <Button type="submit" disabled={loading} className="w-full bg-gradient-primary shadow-elegant" size="lg">
+              {loading ? "Memproses..." : "Masuk"}
             </Button>
           </form>
         </Card>
