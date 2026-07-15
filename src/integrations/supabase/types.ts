@@ -14,7 +14,152 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      kas: {
+        Row: {
+          created_at: string
+          id: string
+          keluar: number
+          masuk: number
+          nama_barang: string
+          tanggal: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          keluar?: number
+          masuk?: number
+          nama_barang: string
+          tanggal?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          keluar?: number
+          masuk?: number
+          nama_barang?: string
+          tanggal?: string
+        }
+        Relationships: []
+      }
+      pelanggan: {
+        Row: {
+          created_at: string
+          foto_url: string | null
+          id: string
+          nama: string
+          no_hp: string | null
+        }
+        Insert: {
+          created_at?: string
+          foto_url?: string | null
+          id?: string
+          nama: string
+          no_hp?: string | null
+        }
+        Update: {
+          created_at?: string
+          foto_url?: string | null
+          id?: string
+          nama?: string
+          no_hp?: string | null
+        }
+        Relationships: []
+      }
+      pengaturan: {
+        Row: {
+          beban: number | null
+          email: string | null
+          id: number
+          nama_petugas: string | null
+          nama_sumur: string | null
+          no_hp_petugas: string | null
+          password: string | null
+          tarif: number | null
+          website: string | null
+        }
+        Insert: {
+          beban?: number | null
+          email?: string | null
+          id?: number
+          nama_petugas?: string | null
+          nama_sumur?: string | null
+          no_hp_petugas?: string | null
+          password?: string | null
+          tarif?: number | null
+          website?: string | null
+        }
+        Update: {
+          beban?: number | null
+          email?: string | null
+          id?: number
+          nama_petugas?: string | null
+          nama_sumur?: string | null
+          no_hp_petugas?: string | null
+          password?: string | null
+          tarif?: number | null
+          website?: string | null
+        }
+        Relationships: []
+      }
+      tagihan: {
+        Row: {
+          beban: number
+          created_at: string
+          foto_meter_url: string | null
+          id: string
+          meter_baru: number
+          meter_lama: number
+          nama_pelanggan: string | null
+          no_hp: string | null
+          pelanggan_id: string | null
+          pemakaian: number
+          status: string
+          tanggal: string
+          tarif: number
+          total: number
+        }
+        Insert: {
+          beban?: number
+          created_at?: string
+          foto_meter_url?: string | null
+          id?: string
+          meter_baru?: number
+          meter_lama?: number
+          nama_pelanggan?: string | null
+          no_hp?: string | null
+          pelanggan_id?: string | null
+          pemakaian?: number
+          status?: string
+          tanggal?: string
+          tarif?: number
+          total?: number
+        }
+        Update: {
+          beban?: number
+          created_at?: string
+          foto_meter_url?: string | null
+          id?: string
+          meter_baru?: number
+          meter_lama?: number
+          nama_pelanggan?: string | null
+          no_hp?: string | null
+          pelanggan_id?: string | null
+          pemakaian?: number
+          status?: string
+          tanggal?: string
+          tarif?: number
+          total?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tagihan_pelanggan_id_fkey"
+            columns: ["pelanggan_id"]
+            isOneToOne: false
+            referencedRelation: "pelanggan"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
