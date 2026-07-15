@@ -12,11 +12,10 @@ export function AppShell({ children, title }: { children: ReactNode; title: stri
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    if (!isAuthed()) {
-      navigate({ to: "/" });
-    } else {
-      setReady(true);
-    }
+    isAuthed().then((ok) => {
+      if (!ok) navigate({ to: "/" });
+      else setReady(true);
+    });
     const d = localStorage.getItem("sumur_bor_dark") === "1";
     setDark(d);
     document.documentElement.classList.toggle("dark", d);
