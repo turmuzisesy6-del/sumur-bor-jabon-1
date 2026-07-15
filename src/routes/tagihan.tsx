@@ -126,7 +126,8 @@ function Page() {
 
   const onMeterFoto = async (f: File | null) => {
     if (!f) return;
-    setForm((s) => ({ ...s, foto_meter_url: await fileToBase64(f) }));
+    const url = await fileToBase64(f);
+    setForm((s) => ({ ...s, foto_meter_url: url }));
   };
 
   return (
