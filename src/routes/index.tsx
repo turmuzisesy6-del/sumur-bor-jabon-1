@@ -13,8 +13,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "SUMUR BOR JABON 1 — Sistem Informasi Tagihan" },
       { name: "description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1. Kelola pelanggan, tagihan bulanan, kas, dan cetak struk pembayaran." },
-      { property: "og:title", content: "SUMUR BOR JABON 1" },
-      { property: "og:description", content: "Sistem Informasi Tagihan Sumur Bor Jabon 1" },
+      { property: "og:title", content: "SUMUR BOR JABON 1 — Sistem Informasi Tagihan" },
+      { property: "og:description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1. Kelola pelanggan, tagihan bulanan, kas, dan cetak struk pembayaran." },
       { property: "og:type", content: "website" },
     ],
   }),

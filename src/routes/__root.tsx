@@ -77,13 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SUMUR BOR JABON 1 — Sistem Informasi Tagihan Air" },
-      { name: "description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1. Kelola pelanggan, tagihan bulanan, kas, sudah/belum bayar, dan cetak struk pembayaran." },
+      { title: "SUMUR BOR JABON 1 — Sistem Informasi Tagihan" },
+      { name: "description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1. Kelola pelanggan, tagihan bulanan, kas, dan cetak struk pembayaran." },
       { name: "author", content: "TURMUZI" },
       { property: "og:title", content: "SUMUR BOR JABON 1 — Sistem Informasi Tagihan" },
-      { property: "og:description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1" },
+      { property: "og:description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1. Kelola pelanggan, tagihan bulanan, kas, dan cetak struk pembayaran." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "SUMUR BOR JABON 1 — Sistem Informasi Tagihan" },
+      { name: "twitter:description", content: "Sistem informasi tagihan air Sumur Bor Jabon 1. Kelola pelanggan, tagihan bulanan, kas, dan cetak struk pembayaran." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ae90f7bd-9c43-4265-b975-7e572ae0581b/id-preview-1c0d9260--68a0b450-ebc4-459d-a9fe-89ff1523871e.lovable.app-1784082130838.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ae90f7bd-9c43-4265-b975-7e572ae0581b/id-preview-1c0d9260--68a0b450-ebc4-459d-a9fe-89ff1523871e.lovable.app-1784082130838.png" },
     ],
     links: [
       {
