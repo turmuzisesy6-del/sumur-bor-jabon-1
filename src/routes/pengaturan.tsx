@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Save, Lock, Download, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { setPassword, getPassword } from "@/lib/auth";
+import { changePassword } from "@/lib/auth";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 
@@ -38,11 +38,10 @@ function Page() {
     toast.success("Pengaturan disimpan");
   };
 
-  const changePwd = () => {
-    if (pwd.current !== getPassword()) return toast.error("Password saat ini salah");
+  const changePwd = async () => {
     if (!pwd.next || pwd.next !== pwd.confirm) return toast.error("Konfirmasi password tidak cocok");
-    setPassword(pwd.next);
-    supabase.from("pengaturan").update({ password: pwd.next }).eq("id", 1);
+    const res = await changePassword(pwd.current, pwd.next);
+    if (!res.ok) return toast.error(res.error || "Gagal mengubah password");
     toast.success("Password berhasil diubah");
     setPwd({ current: "", next: "", confirm: "" });
   };
