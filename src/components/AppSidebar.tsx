@@ -38,8 +38,8 @@ export function AppSidebar() {
       ? "bg-gradient-primary text-primary-foreground font-medium shadow-elegant"
       : "hover:bg-sidebar-accent";
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate({ to: "/" });
   };
 
