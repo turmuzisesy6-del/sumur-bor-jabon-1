@@ -26,13 +26,18 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    if (isAuthed()) navigate({ to: "/dashboard" });
+    isAuthed().then((ok) => { if (ok) navigate({ to: "/dashboard" }); });
   }, [navigate]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(username, password)) {
+    setLoading(true);
+    const ok = await login(username, password);
+    setLoading(false);
+    if (ok) {
       toast.success("Selamat datang, Petugas TURMUZI!");
       navigate({ to: "/dashboard" });
     } else {
@@ -75,8 +80,8 @@ function Login() {
                   placeholder="••••••" className="pl-9" required />
               </div>
             </div>
-            <Button type="submit" className="w-full bg-gradient-primary shadow-elegant" size="lg">
-              Masuk
+            <Button type="submit" disabled={loading} className="w-full bg-gradient-primary shadow-elegant" size="lg">
+              {loading ? "Memproses..." : "Masuk"}
             </Button>
           </form>
         </Card>

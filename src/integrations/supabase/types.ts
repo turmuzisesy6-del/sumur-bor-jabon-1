@@ -73,7 +73,6 @@ export type Database = {
           nama_petugas: string | null
           nama_sumur: string | null
           no_hp_petugas: string | null
-          password: string | null
           tarif: number | null
           website: string | null
         }
@@ -84,7 +83,6 @@ export type Database = {
           nama_petugas?: string | null
           nama_sumur?: string | null
           no_hp_petugas?: string | null
-          password?: string | null
           tarif?: number | null
           website?: string | null
         }
@@ -95,7 +93,6 @@ export type Database = {
           nama_petugas?: string | null
           nama_sumur?: string | null
           no_hp_petugas?: string | null
-          password?: string | null
           tarif?: number | null
           website?: string | null
         }
