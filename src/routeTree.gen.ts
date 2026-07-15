@@ -9,8 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TagihanRouteImport } from './routes/tagihan'
+import { Route as SudahBayarRouteImport } from './routes/sudah-bayar'
+import { Route as PindaiRouteImport } from './routes/pindai'
+import { Route as PengaturanRouteImport } from './routes/pengaturan'
+import { Route as PelangganRouteImport } from './routes/pelanggan'
+import { Route as KasRouteImport } from './routes/kas'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as BelumBayarRouteImport } from './routes/belum-bayar'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TagihanRoute = TagihanRouteImport.update({
+  id: '/tagihan',
+  path: '/tagihan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SudahBayarRoute = SudahBayarRouteImport.update({
+  id: '/sudah-bayar',
+  path: '/sudah-bayar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PindaiRoute = PindaiRouteImport.update({
+  id: '/pindai',
+  path: '/pindai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengaturanRoute = PengaturanRouteImport.update({
+  id: '/pengaturan',
+  path: '/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PelangganRoute = PelangganRouteImport.update({
+  id: '/pelanggan',
+  path: '/pelanggan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KasRoute = KasRouteImport.update({
+  id: '/kas',
+  path: '/kas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BelumBayarRoute = BelumBayarRouteImport.update({
+  id: '/belum-bayar',
+  path: '/belum-bayar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +67,144 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/belum-bayar': typeof BelumBayarRoute
+  '/dashboard': typeof DashboardRoute
+  '/kas': typeof KasRoute
+  '/pelanggan': typeof PelangganRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/pindai': typeof PindaiRoute
+  '/sudah-bayar': typeof SudahBayarRoute
+  '/tagihan': typeof TagihanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/belum-bayar': typeof BelumBayarRoute
+  '/dashboard': typeof DashboardRoute
+  '/kas': typeof KasRoute
+  '/pelanggan': typeof PelangganRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/pindai': typeof PindaiRoute
+  '/sudah-bayar': typeof SudahBayarRoute
+  '/tagihan': typeof TagihanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/belum-bayar': typeof BelumBayarRoute
+  '/dashboard': typeof DashboardRoute
+  '/kas': typeof KasRoute
+  '/pelanggan': typeof PelangganRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/pindai': typeof PindaiRoute
+  '/sudah-bayar': typeof SudahBayarRoute
+  '/tagihan': typeof TagihanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/belum-bayar'
+    | '/dashboard'
+    | '/kas'
+    | '/pelanggan'
+    | '/pengaturan'
+    | '/pindai'
+    | '/sudah-bayar'
+    | '/tagihan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/belum-bayar'
+    | '/dashboard'
+    | '/kas'
+    | '/pelanggan'
+    | '/pengaturan'
+    | '/pindai'
+    | '/sudah-bayar'
+    | '/tagihan'
+  id:
+    | '__root__'
+    | '/'
+    | '/belum-bayar'
+    | '/dashboard'
+    | '/kas'
+    | '/pelanggan'
+    | '/pengaturan'
+    | '/pindai'
+    | '/sudah-bayar'
+    | '/tagihan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BelumBayarRoute: typeof BelumBayarRoute
+  DashboardRoute: typeof DashboardRoute
+  KasRoute: typeof KasRoute
+  PelangganRoute: typeof PelangganRoute
+  PengaturanRoute: typeof PengaturanRoute
+  PindaiRoute: typeof PindaiRoute
+  SudahBayarRoute: typeof SudahBayarRoute
+  TagihanRoute: typeof TagihanRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tagihan': {
+      id: '/tagihan'
+      path: '/tagihan'
+      fullPath: '/tagihan'
+      preLoaderRoute: typeof TagihanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sudah-bayar': {
+      id: '/sudah-bayar'
+      path: '/sudah-bayar'
+      fullPath: '/sudah-bayar'
+      preLoaderRoute: typeof SudahBayarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pindai': {
+      id: '/pindai'
+      path: '/pindai'
+      fullPath: '/pindai'
+      preLoaderRoute: typeof PindaiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengaturan': {
+      id: '/pengaturan'
+      path: '/pengaturan'
+      fullPath: '/pengaturan'
+      preLoaderRoute: typeof PengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pelanggan': {
+      id: '/pelanggan'
+      path: '/pelanggan'
+      fullPath: '/pelanggan'
+      preLoaderRoute: typeof PelangganRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kas': {
+      id: '/kas'
+      path: '/kas'
+      fullPath: '/kas'
+      preLoaderRoute: typeof KasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/belum-bayar': {
+      id: '/belum-bayar'
+      path: '/belum-bayar'
+      fullPath: '/belum-bayar'
+      preLoaderRoute: typeof BelumBayarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BelumBayarRoute: BelumBayarRoute,
+  DashboardRoute: DashboardRoute,
+  KasRoute: KasRoute,
+  PelangganRoute: PelangganRoute,
+  PengaturanRoute: PengaturanRoute,
+  PindaiRoute: PindaiRoute,
+  SudahBayarRoute: SudahBayarRoute,
+  TagihanRoute: TagihanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
