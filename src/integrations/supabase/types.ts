@@ -43,27 +43,83 @@ export type Database = {
       }
       pelanggan: {
         Row: {
+          alamat: string | null
           created_at: string
           foto_url: string | null
           id: string
           nama: string
           no_hp: string | null
+          nomor_pelanggan: string | null
+          status_aktif: boolean
         }
         Insert: {
+          alamat?: string | null
           created_at?: string
           foto_url?: string | null
           id?: string
           nama: string
           no_hp?: string | null
+          nomor_pelanggan?: string | null
+          status_aktif?: boolean
         }
         Update: {
+          alamat?: string | null
           created_at?: string
           foto_url?: string | null
           id?: string
           nama?: string
           no_hp?: string | null
+          nomor_pelanggan?: string | null
+          status_aktif?: boolean
         }
         Relationships: []
+      }
+      pengajuan_perubahan: {
+        Row: {
+          alasan_penolakan: string | null
+          created_at: string
+          id: string
+          nama_baru: string | null
+          nama_lama: string | null
+          no_hp_baru: string | null
+          no_hp_lama: string | null
+          pelanggan_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          alasan_penolakan?: string | null
+          created_at?: string
+          id?: string
+          nama_baru?: string | null
+          nama_lama?: string | null
+          no_hp_baru?: string | null
+          no_hp_lama?: string | null
+          pelanggan_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          alasan_penolakan?: string | null
+          created_at?: string
+          id?: string
+          nama_baru?: string | null
+          nama_lama?: string | null
+          no_hp_baru?: string | null
+          no_hp_lama?: string | null
+          pelanggan_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pengajuan_perubahan_pelanggan_id_fkey"
+            columns: ["pelanggan_id"]
+            isOneToOne: false
+            referencedRelation: "pelanggan"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       pengaturan: {
         Row: {

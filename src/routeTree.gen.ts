@@ -13,11 +13,17 @@ import { Route as TagihanRouteImport } from './routes/tagihan'
 import { Route as SudahBayarRouteImport } from './routes/sudah-bayar'
 import { Route as PindaiRouteImport } from './routes/pindai'
 import { Route as PengaturanRouteImport } from './routes/pengaturan'
+import { Route as PengajuanRouteImport } from './routes/pengajuan'
 import { Route as PelangganRouteImport } from './routes/pelanggan'
 import { Route as KasRouteImport } from './routes/kas'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as BelumBayarRouteImport } from './routes/belum-bayar'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalIndexRouteImport } from './routes/portal/index'
+import { Route as PortalRiwayatRouteImport } from './routes/portal/riwayat'
+import { Route as PortalProfilRouteImport } from './routes/portal/profil'
+import { Route as PortalPengaturanRouteImport } from './routes/portal/pengaturan'
+import { Route as PortalBerandaRouteImport } from './routes/portal/beranda'
 
 const TagihanRoute = TagihanRouteImport.update({
   id: '/tagihan',
@@ -37,6 +43,11 @@ const PindaiRoute = PindaiRouteImport.update({
 const PengaturanRoute = PengaturanRouteImport.update({
   id: '/pengaturan',
   path: '/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengajuanRoute = PengajuanRouteImport.update({
+  id: '/pengajuan',
+  path: '/pengajuan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PelangganRoute = PelangganRouteImport.update({
@@ -64,6 +75,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/portal/',
+  path: '/portal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRiwayatRoute = PortalRiwayatRouteImport.update({
+  id: '/portal/riwayat',
+  path: '/portal/riwayat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalProfilRoute = PortalProfilRouteImport.update({
+  id: '/portal/profil',
+  path: '/portal/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalPengaturanRoute = PortalPengaturanRouteImport.update({
+  id: '/portal/pengaturan',
+  path: '/portal/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalBerandaRoute = PortalBerandaRouteImport.update({
+  id: '/portal/beranda',
+  path: '/portal/beranda',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,10 +107,16 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/kas': typeof KasRoute
   '/pelanggan': typeof PelangganRoute
+  '/pengajuan': typeof PengajuanRoute
   '/pengaturan': typeof PengaturanRoute
   '/pindai': typeof PindaiRoute
   '/sudah-bayar': typeof SudahBayarRoute
   '/tagihan': typeof TagihanRoute
+  '/portal/beranda': typeof PortalBerandaRoute
+  '/portal/pengaturan': typeof PortalPengaturanRoute
+  '/portal/profil': typeof PortalProfilRoute
+  '/portal/riwayat': typeof PortalRiwayatRoute
+  '/portal/': typeof PortalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,10 +124,16 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/kas': typeof KasRoute
   '/pelanggan': typeof PelangganRoute
+  '/pengajuan': typeof PengajuanRoute
   '/pengaturan': typeof PengaturanRoute
   '/pindai': typeof PindaiRoute
   '/sudah-bayar': typeof SudahBayarRoute
   '/tagihan': typeof TagihanRoute
+  '/portal/beranda': typeof PortalBerandaRoute
+  '/portal/pengaturan': typeof PortalPengaturanRoute
+  '/portal/profil': typeof PortalProfilRoute
+  '/portal/riwayat': typeof PortalRiwayatRoute
+  '/portal': typeof PortalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,10 +142,16 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/kas': typeof KasRoute
   '/pelanggan': typeof PelangganRoute
+  '/pengajuan': typeof PengajuanRoute
   '/pengaturan': typeof PengaturanRoute
   '/pindai': typeof PindaiRoute
   '/sudah-bayar': typeof SudahBayarRoute
   '/tagihan': typeof TagihanRoute
+  '/portal/beranda': typeof PortalBerandaRoute
+  '/portal/pengaturan': typeof PortalPengaturanRoute
+  '/portal/profil': typeof PortalProfilRoute
+  '/portal/riwayat': typeof PortalRiwayatRoute
+  '/portal/': typeof PortalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,10 +161,16 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kas'
     | '/pelanggan'
+    | '/pengajuan'
     | '/pengaturan'
     | '/pindai'
     | '/sudah-bayar'
     | '/tagihan'
+    | '/portal/beranda'
+    | '/portal/pengaturan'
+    | '/portal/profil'
+    | '/portal/riwayat'
+    | '/portal/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -118,10 +178,16 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kas'
     | '/pelanggan'
+    | '/pengajuan'
     | '/pengaturan'
     | '/pindai'
     | '/sudah-bayar'
     | '/tagihan'
+    | '/portal/beranda'
+    | '/portal/pengaturan'
+    | '/portal/profil'
+    | '/portal/riwayat'
+    | '/portal'
   id:
     | '__root__'
     | '/'
@@ -129,10 +195,16 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kas'
     | '/pelanggan'
+    | '/pengajuan'
     | '/pengaturan'
     | '/pindai'
     | '/sudah-bayar'
     | '/tagihan'
+    | '/portal/beranda'
+    | '/portal/pengaturan'
+    | '/portal/profil'
+    | '/portal/riwayat'
+    | '/portal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -141,10 +213,16 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   KasRoute: typeof KasRoute
   PelangganRoute: typeof PelangganRoute
+  PengajuanRoute: typeof PengajuanRoute
   PengaturanRoute: typeof PengaturanRoute
   PindaiRoute: typeof PindaiRoute
   SudahBayarRoute: typeof SudahBayarRoute
   TagihanRoute: typeof TagihanRoute
+  PortalBerandaRoute: typeof PortalBerandaRoute
+  PortalPengaturanRoute: typeof PortalPengaturanRoute
+  PortalProfilRoute: typeof PortalProfilRoute
+  PortalRiwayatRoute: typeof PortalRiwayatRoute
+  PortalIndexRoute: typeof PortalIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -175,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/pengaturan'
       fullPath: '/pengaturan'
       preLoaderRoute: typeof PengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengajuan': {
+      id: '/pengajuan'
+      path: '/pengajuan'
+      fullPath: '/pengajuan'
+      preLoaderRoute: typeof PengajuanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pelanggan': {
@@ -212,6 +297,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/': {
+      id: '/portal/'
+      path: '/portal'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/riwayat': {
+      id: '/portal/riwayat'
+      path: '/portal/riwayat'
+      fullPath: '/portal/riwayat'
+      preLoaderRoute: typeof PortalRiwayatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/profil': {
+      id: '/portal/profil'
+      path: '/portal/profil'
+      fullPath: '/portal/profil'
+      preLoaderRoute: typeof PortalProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/pengaturan': {
+      id: '/portal/pengaturan'
+      path: '/portal/pengaturan'
+      fullPath: '/portal/pengaturan'
+      preLoaderRoute: typeof PortalPengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/beranda': {
+      id: '/portal/beranda'
+      path: '/portal/beranda'
+      fullPath: '/portal/beranda'
+      preLoaderRoute: typeof PortalBerandaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -221,21 +341,17 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   KasRoute: KasRoute,
   PelangganRoute: PelangganRoute,
+  PengajuanRoute: PengajuanRoute,
   PengaturanRoute: PengaturanRoute,
   PindaiRoute: PindaiRoute,
   SudahBayarRoute: SudahBayarRoute,
   TagihanRoute: TagihanRoute,
+  PortalBerandaRoute: PortalBerandaRoute,
+  PortalPengaturanRoute: PortalPengaturanRoute,
+  PortalProfilRoute: PortalProfilRoute,
+  PortalRiwayatRoute: PortalRiwayatRoute,
+  PortalIndexRoute: PortalIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

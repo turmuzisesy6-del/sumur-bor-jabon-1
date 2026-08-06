@@ -1,7 +1,7 @@
 import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import {
   LayoutDashboard, Users, Receipt, Wallet, CheckCircle2, XCircle,
-  Settings, LogOut, Droplets, ScanLine,
+  Settings, LogOut, Droplets, ScanLine, ClipboardCheck, Smartphone,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -23,8 +23,11 @@ const masterData = [
   { title: "Belum Bayar", url: "/belum-bayar", icon: XCircle },
 ];
 const lain = [
+  { title: "Pengajuan Pelanggan", url: "/pengajuan", icon: ClipboardCheck },
+  { title: "Portal Pelanggan", url: "/portal", icon: Smartphone },
   { title: "Pengaturan", url: "/pengaturan", icon: Settings },
 ];
+
 
 export function AppSidebar() {
   const { state } = useSidebar();
