@@ -13,6 +13,7 @@ import { Route as TagihanRouteImport } from './routes/tagihan'
 import { Route as SudahBayarRouteImport } from './routes/sudah-bayar'
 import { Route as PindaiRouteImport } from './routes/pindai'
 import { Route as PengaturanRouteImport } from './routes/pengaturan'
+import { Route as PengajuanRouteImport } from './routes/pengajuan'
 import { Route as PelangganRouteImport } from './routes/pelanggan'
 import { Route as KasRouteImport } from './routes/kas'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -42,6 +43,11 @@ const PindaiRoute = PindaiRouteImport.update({
 const PengaturanRoute = PengaturanRouteImport.update({
   id: '/pengaturan',
   path: '/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengajuanRoute = PengajuanRouteImport.update({
+  id: '/pengajuan',
+  path: '/pengajuan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PelangganRoute = PelangganRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/kas': typeof KasRoute
   '/pelanggan': typeof PelangganRoute
+  '/pengajuan': typeof PengajuanRoute
   '/pengaturan': typeof PengaturanRoute
   '/pindai': typeof PindaiRoute
   '/sudah-bayar': typeof SudahBayarRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/kas': typeof KasRoute
   '/pelanggan': typeof PelangganRoute
+  '/pengajuan': typeof PengajuanRoute
   '/pengaturan': typeof PengaturanRoute
   '/pindai': typeof PindaiRoute
   '/sudah-bayar': typeof SudahBayarRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/kas': typeof KasRoute
   '/pelanggan': typeof PelangganRoute
+  '/pengajuan': typeof PengajuanRoute
   '/pengaturan': typeof PengaturanRoute
   '/pindai': typeof PindaiRoute
   '/sudah-bayar': typeof SudahBayarRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kas'
     | '/pelanggan'
+    | '/pengajuan'
     | '/pengaturan'
     | '/pindai'
     | '/sudah-bayar'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kas'
     | '/pelanggan'
+    | '/pengajuan'
     | '/pengaturan'
     | '/pindai'
     | '/sudah-bayar'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kas'
     | '/pelanggan'
+    | '/pengajuan'
     | '/pengaturan'
     | '/pindai'
     | '/sudah-bayar'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   KasRoute: typeof KasRoute
   PelangganRoute: typeof PelangganRoute
+  PengajuanRoute: typeof PengajuanRoute
   PengaturanRoute: typeof PengaturanRoute
   PindaiRoute: typeof PindaiRoute
   SudahBayarRoute: typeof SudahBayarRoute
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/pengaturan'
       fullPath: '/pengaturan'
       preLoaderRoute: typeof PengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengajuan': {
+      id: '/pengajuan'
+      path: '/pengajuan'
+      fullPath: '/pengajuan'
+      preLoaderRoute: typeof PengajuanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pelanggan': {
@@ -321,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   KasRoute: KasRoute,
   PelangganRoute: PelangganRoute,
+  PengajuanRoute: PengajuanRoute,
   PengaturanRoute: PengaturanRoute,
   PindaiRoute: PindaiRoute,
   SudahBayarRoute: SudahBayarRoute,
