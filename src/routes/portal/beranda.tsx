@@ -158,7 +158,7 @@ function Page() {
                 <XAxis dataKey="bulan" fontSize={11} tickLine={false} axisLine={false} />
                 <YAxis fontSize={11} tickLine={false} axisLine={false} width={28} />
                 <Tooltip formatter={(v: number) => [`${v} M³`, "Pemakaian"]} />
-                <Bar dataKey="pemakaian" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="pemakaian" fill="var(--primary)" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
