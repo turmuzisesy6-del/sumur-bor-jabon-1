@@ -43,6 +43,7 @@ export type Database = {
       }
       pelanggan: {
         Row: {
+          akses_token: string
           alamat: string | null
           created_at: string
           foto_url: string | null
@@ -53,6 +54,7 @@ export type Database = {
           status_aktif: boolean
         }
         Insert: {
+          akses_token?: string
           alamat?: string | null
           created_at?: string
           foto_url?: string | null
@@ -63,6 +65,7 @@ export type Database = {
           status_aktif?: boolean
         }
         Update: {
+          akses_token?: string
           alamat?: string | null
           created_at?: string
           foto_url?: string | null

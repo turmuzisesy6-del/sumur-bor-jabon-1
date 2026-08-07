@@ -9,7 +9,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter,
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Pencil, Trash2, Search, FileSpreadsheet, ImageIcon } from "lucide-react";
+import { Plus, Pencil, Trash2, Search, FileSpreadsheet, ImageIcon, Link2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { fileToBase64 } from "@/lib/format";
 import { exportExcel } from "@/lib/exports";
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/pelanggan")({
   component: Page,
 });
 
-interface P { id: string; nama: string; no_hp: string | null; foto_url: string | null }
+interface P { id: string; nama: string; no_hp: string | null; foto_url: string | null; akses_token?: string | null }
 
 function Page() {
   const [rows, setRows] = useState<P[]>([]);
@@ -35,6 +35,28 @@ function Page() {
     setRows((data as P[]) || []);
   };
   useEffect(() => { load(); }, []);
+
+  const linkFor = (r: P) =>
+    `${window.location.origin}/portal?t=${r.akses_token ?? ""}`;
+
+  const copyLink = async (r: P) => {
+    if (!r.akses_token) return toast.error("Tautan belum tersedia, muat ulang halaman");
+    try {
+      await navigator.clipboard.writeText(linkFor(r));
+      toast.success(`Tautan portal ${r.nama} disalin`);
+    } catch {
+      toast.error("Gagal menyalin tautan");
+    }
+  };
+
+  const shareWa = (r: P) => {
+    if (!r.akses_token) return toast.error("Tautan belum tersedia, muat ulang halaman");
+    const hp = (r.no_hp || "").replace(/\D/g, "").replace(/^0/, "62");
+    const pesan = encodeURIComponent(
+      `Halo ${r.nama}, berikut tautan pribadi untuk cek tagihan air Sumur Bor Jabon 1:\n${linkFor(r)}\n\nCukup buka tautan ini, tanpa perlu isi nomor HP.`,
+    );
+    window.open(hp ? `https://wa.me/${hp}?text=${pesan}` : `https://wa.me/?text=${pesan}`, "_blank");
+  };
 
   const openAdd = () => { setEdit(null); setForm({ nama: "", no_hp: "", foto_url: "" }); setOpen(true); };
   const openEdit = (r: P) => { setEdit(r); setForm({ nama: r.nama, no_hp: r.no_hp || "", foto_url: r.foto_url || "" }); setOpen(true); };
@@ -113,6 +135,8 @@ function Page() {
                   <TableCell className="font-medium">{r.nama}</TableCell>
                   <TableCell>{r.no_hp || "-"}</TableCell>
                   <TableCell className="text-right">
+                    <Button variant="ghost" size="icon" title="Salin tautan portal" onClick={() => copyLink(r)}><Link2 className="h-4 w-4 text-primary" /></Button>
+                    <Button variant="ghost" size="icon" title="Kirim tautan via WhatsApp" onClick={() => shareWa(r)}><MessageCircle className="h-4 w-4 text-emerald-600" /></Button>
                     <Button variant="ghost" size="icon" onClick={() => openEdit(r)}><Pencil className="h-4 w-4" /></Button>
                     <Button variant="ghost" size="icon" onClick={() => del(r.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
                   </TableCell>

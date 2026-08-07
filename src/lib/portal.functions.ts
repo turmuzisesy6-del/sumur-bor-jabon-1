@@ -96,3 +96,14 @@ export const portalAjukanPerubahan = createServerFn({ method: "POST" })
     if (error) return { ok: false as const, error: error.message };
     return { ok: true as const };
   });
+
+/** Login pelanggan lewat tautan unik (token) */
+export const portalLoginToken = createServerFn({ method: "POST" })
+  .inputValidator((d: unknown) => z.object({ token: z.string().min(10).max(64) }).parse(d))
+  .handler(async ({ data }) => {
+    const db = await admin();
+    const { data: p } = await db
+      .from("pelanggan").select("id").eq("akses_token", data.token).maybeSingle();
+    if (!p) return { ok: false as const };
+    return { ok: true as const, id: p.id as string };
+  });

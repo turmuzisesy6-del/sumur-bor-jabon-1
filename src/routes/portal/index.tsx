@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
-import { portalLogin } from "@/lib/portal.functions";
+import { portalLogin, portalLoginToken } from "@/lib/portal.functions";
 import { getPortalId, setPortalId } from "@/lib/portal-session";
 
 export const Route = createFileRoute("/portal/")({
@@ -29,7 +29,34 @@ function PortalLogin() {
   const [loading, setLoading] = useState(false);
   const [splash, setSplash] = useState(true);
 
+  const [autoLogin, setAutoLogin] = useState(true);
+
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("t") || params.get("token");
+
+    if (token) {
+      portalLoginToken({ data: { token } })
+        .then((res) => {
+          if (res.ok) {
+            setPortalId(res.id);
+            toast.success("✅ Login berhasil");
+            navigate({ to: "/portal/beranda" });
+          } else {
+            toast.error("❌ Tautan tidak valid atau sudah kedaluwarsa");
+            setAutoLogin(false);
+            setSplash(false);
+          }
+        })
+        .catch(() => {
+          toast.error("❌ Gagal terhubung ke server");
+          setAutoLogin(false);
+          setSplash(false);
+        });
+      return;
+    }
+
+    setAutoLogin(false);
     if (getPortalId()) { navigate({ to: "/portal/beranda" }); return; }
     const t = setTimeout(() => setSplash(false), 1100);
     return () => clearTimeout(t);
@@ -66,8 +93,9 @@ function PortalLogin() {
         </div>
 
         {splash ? (
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col items-center gap-2">
             <Loader2 className="h-6 w-6 animate-spin text-white/80" />
+            {autoLogin && <p className="text-white/80 text-sm">Membuka portal Anda...</p>}
           </div>
         ) : (
           <Card className="mt-6 p-6 shadow-elegant animate-in fade-in slide-in-from-bottom-4 duration-500">
