@@ -93,8 +93,9 @@ function PortalLogin() {
         </div>
 
         {splash ? (
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-col items-center gap-2">
             <Loader2 className="h-6 w-6 animate-spin text-white/80" />
+            {autoLogin && <p className="text-white/80 text-sm">Membuka portal Anda...</p>}
           </div>
         ) : (
           <Card className="mt-6 p-6 shadow-elegant animate-in fade-in slide-in-from-bottom-4 duration-500">
