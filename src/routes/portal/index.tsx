@@ -29,7 +29,34 @@ function PortalLogin() {
   const [loading, setLoading] = useState(false);
   const [splash, setSplash] = useState(true);
 
+  const [autoLogin, setAutoLogin] = useState(true);
+
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("t") || params.get("token");
+
+    if (token) {
+      portalLoginToken({ data: { token } })
+        .then((res) => {
+          if (res.ok) {
+            setPortalId(res.id);
+            toast.success("✅ Login berhasil");
+            navigate({ to: "/portal/beranda" });
+          } else {
+            toast.error("❌ Tautan tidak valid atau sudah kedaluwarsa");
+            setAutoLogin(false);
+            setSplash(false);
+          }
+        })
+        .catch(() => {
+          toast.error("❌ Gagal terhubung ke server");
+          setAutoLogin(false);
+          setSplash(false);
+        });
+      return;
+    }
+
+    setAutoLogin(false);
     if (getPortalId()) { navigate({ to: "/portal/beranda" }); return; }
     const t = setTimeout(() => setSplash(false), 1100);
     return () => clearTimeout(t);
