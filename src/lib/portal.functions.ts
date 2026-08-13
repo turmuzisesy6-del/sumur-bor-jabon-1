@@ -49,7 +49,7 @@ async function findPelangganByHp(hp: string) {
 
 /** Login pelanggan hanya dengan nomor HP */
 export const portalLogin = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => z.object({ no_hp: z.string().min(4).max(30) }).parse(d))
+  .inputValidator((d: unknown) => z.object({ no_hp: z.string().min(3).max(30) }).parse(d))
   .handler(async ({ data }) => {
     const p = await findPelangganByHp(data.no_hp);
     if (!p) return { ok: false as const };
