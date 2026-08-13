@@ -37,7 +37,8 @@ function Page() {
   useEffect(() => { load(); }, []);
 
   const linkFor = (r: P) =>
-    `${window.location.origin}/portal?t=${r.akses_token ?? ""}`;
+    `${window.location.origin}/p/${r.akses_token ?? ""}`;
+
 
   const copyLink = async (r: P) => {
     if (!r.akses_token) return toast.error("Tautan belum tersedia, muat ulang halaman");
