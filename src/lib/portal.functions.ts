@@ -1,12 +1,31 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+/** Ambil digit saja */
+function digits(v: string): string {
+  return (v || "").replace(/\D/g, "");
+}
+
 /** Normalisasi nomor HP Indonesia -> hanya digit, awalan 62 dibuang jadi 0 */
 function normHp(v: string): string {
-  let d = (v || "").replace(/\D/g, "");
+  let d = digits(v);
   if (d.startsWith("62")) d = "0" + d.slice(2);
   if (d && !d.startsWith("0")) d = "0" + d;
   return d;
+}
+
+/** Cocok jika sama persis (digit), sama setelah normalisasi, atau salah satu akhiran yang lain */
+function hpMatch(input: string, stored: string): boolean {
+  const a = digits(input);
+  const b = digits(stored);
+  if (!a || !b) return false;
+  if (a === b) return true;
+  if (normHp(a) === normHp(b)) return true;
+  const na = normHp(a).replace(/^0+/, "");
+  const nb = normHp(b).replace(/^0+/, "");
+  if (na && nb && na === nb) return true;
+  if (a.length >= 8 && b.length >= 8 && (a.endsWith(b) || b.endsWith(a))) return true;
+  return false;
 }
 
 async function admin() {
@@ -16,16 +35,21 @@ async function admin() {
 
 async function findPelangganByHp(hp: string) {
   const db = await admin();
-  const target = normHp(hp);
-  if (target.length < 6) return null;
+  const target = digits(hp);
+  if (target.length < 3) return null;
   const { data, error } = await db.from("pelanggan").select("*");
   if (error) throw error;
-  return (data || []).find((p) => normHp(p.no_hp || "") === target) ?? null;
+  const rows = data || [];
+  return (
+    rows.find((p) => digits(p.no_hp || "") === target) ??
+    rows.find((p) => hpMatch(target, p.no_hp || "")) ??
+    null
+  );
 }
 
 /** Login pelanggan hanya dengan nomor HP */
 export const portalLogin = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => z.object({ no_hp: z.string().min(4).max(30) }).parse(d))
+  .inputValidator((d: unknown) => z.object({ no_hp: z.string().min(3).max(30) }).parse(d))
   .handler(async ({ data }) => {
     const p = await findPelangganByHp(data.no_hp);
     if (!p) return { ok: false as const };
