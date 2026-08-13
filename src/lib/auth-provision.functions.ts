@@ -23,16 +23,26 @@ export const ensureDefaultOperator = createServerFn({ method: "POST" })
     });
     if (listErr) throw listErr;
 
-    const existing = list.users.find((u) => u.email === DEFAULT_EMAIL);
-    if (existing) return { ok: true, email: DEFAULT_EMAIL, created: false };
+    const ensureAdminRole = async (userId: string) => {
+      await supabaseAdmin
+        .from("user_roles")
+        .upsert({ user_id: userId, role: "admin" }, { onConflict: "user_id,role" });
+    };
 
-    const { error: createErr } = await supabaseAdmin.auth.admin.createUser({
+    const existing = list.users.find((u) => u.email === DEFAULT_EMAIL);
+    if (existing) {
+      await ensureAdminRole(existing.id);
+      return { ok: true, email: DEFAULT_EMAIL, created: false };
+    }
+
+    const { data: created, error: createErr } = await supabaseAdmin.auth.admin.createUser({
       email: DEFAULT_EMAIL,
       password: DEFAULT_PASSWORD,
       email_confirm: true,
       user_metadata: { username: "TURMUZI" },
     });
     if (createErr) throw createErr;
+    if (created?.user) await ensureAdminRole(created.user.id);
 
     return { ok: true, email: DEFAULT_EMAIL, created: true };
   });
