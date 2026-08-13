@@ -1,14 +1,16 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, History, User, Settings, Droplets, Moon, Sun, RefreshCw } from "lucide-react";
+import { Home, History, User, Settings, Droplets, Moon, Sun, RefreshCw, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const nav = [
   { to: "/portal/beranda", label: "Beranda", icon: Home },
+  { to: "/portal/tunggakan", label: "Tunggakan", icon: AlertTriangle },
   { to: "/portal/riwayat", label: "Riwayat", icon: History },
   { to: "/portal/profil", label: "Profil", icon: User },
   { to: "/portal/pengaturan", label: "Pengaturan", icon: Settings },
 ] as const;
+
 
 export function PortalShell({
   title, children, onRefresh, refreshing,

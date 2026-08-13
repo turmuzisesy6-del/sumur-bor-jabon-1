@@ -21,6 +21,7 @@ import { Route as BelumBayarRouteImport } from './routes/belum-bayar'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PortalIndexRouteImport } from './routes/portal/index'
 import { Route as PIndexRouteImport } from './routes/p.index'
+import { Route as PortalTunggakanRouteImport } from './routes/portal/tunggakan'
 import { Route as PortalRiwayatRouteImport } from './routes/portal/riwayat'
 import { Route as PortalProfilRouteImport } from './routes/portal/profil'
 import { Route as PortalPengaturanRouteImport } from './routes/portal/pengaturan'
@@ -87,6 +88,11 @@ const PIndexRoute = PIndexRouteImport.update({
   path: '/p/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalTunggakanRoute = PortalTunggakanRouteImport.update({
+  id: '/portal/tunggakan',
+  path: '/portal/tunggakan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortalRiwayatRoute = PortalRiwayatRouteImport.update({
   id: '/portal/riwayat',
   path: '/portal/riwayat',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/portal/pengaturan': typeof PortalPengaturanRoute
   '/portal/profil': typeof PortalProfilRoute
   '/portal/riwayat': typeof PortalRiwayatRoute
+  '/portal/tunggakan': typeof PortalTunggakanRoute
   '/p/': typeof PIndexRoute
   '/portal/': typeof PortalIndexRoute
 }
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/portal/pengaturan': typeof PortalPengaturanRoute
   '/portal/profil': typeof PortalProfilRoute
   '/portal/riwayat': typeof PortalRiwayatRoute
+  '/portal/tunggakan': typeof PortalTunggakanRoute
   '/p': typeof PIndexRoute
   '/portal': typeof PortalIndexRoute
 }
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/portal/pengaturan': typeof PortalPengaturanRoute
   '/portal/profil': typeof PortalProfilRoute
   '/portal/riwayat': typeof PortalRiwayatRoute
+  '/portal/tunggakan': typeof PortalTunggakanRoute
   '/p/': typeof PIndexRoute
   '/portal/': typeof PortalIndexRoute
 }
@@ -189,6 +198,7 @@ export interface FileRouteTypes {
     | '/portal/pengaturan'
     | '/portal/profil'
     | '/portal/riwayat'
+    | '/portal/tunggakan'
     | '/p/'
     | '/portal/'
   fileRoutesByTo: FileRoutesByTo
@@ -208,6 +218,7 @@ export interface FileRouteTypes {
     | '/portal/pengaturan'
     | '/portal/profil'
     | '/portal/riwayat'
+    | '/portal/tunggakan'
     | '/p'
     | '/portal'
   id:
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/portal/pengaturan'
     | '/portal/profil'
     | '/portal/riwayat'
+    | '/portal/tunggakan'
     | '/p/'
     | '/portal/'
   fileRoutesById: FileRoutesById
@@ -247,6 +259,7 @@ export interface RootRouteChildren {
   PortalPengaturanRoute: typeof PortalPengaturanRoute
   PortalProfilRoute: typeof PortalProfilRoute
   PortalRiwayatRoute: typeof PortalRiwayatRoute
+  PortalTunggakanRoute: typeof PortalTunggakanRoute
   PIndexRoute: typeof PIndexRoute
   PortalIndexRoute: typeof PortalIndexRoute
 }
@@ -337,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/tunggakan': {
+      id: '/portal/tunggakan'
+      path: '/portal/tunggakan'
+      fullPath: '/portal/tunggakan'
+      preLoaderRoute: typeof PortalTunggakanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portal/riwayat': {
       id: '/portal/riwayat'
       path: '/portal/riwayat'
@@ -391,6 +411,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortalPengaturanRoute: PortalPengaturanRoute,
   PortalProfilRoute: PortalProfilRoute,
   PortalRiwayatRoute: PortalRiwayatRoute,
+  PortalTunggakanRoute: PortalTunggakanRoute,
   PIndexRoute: PIndexRoute,
   PortalIndexRoute: PortalIndexRoute,
 }
