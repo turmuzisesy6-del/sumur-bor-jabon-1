@@ -35,11 +35,16 @@ async function admin() {
 
 async function findPelangganByHp(hp: string) {
   const db = await admin();
-  const target = normHp(hp);
-  if (target.length < 6) return null;
+  const target = digits(hp);
+  if (target.length < 3) return null;
   const { data, error } = await db.from("pelanggan").select("*");
   if (error) throw error;
-  return (data || []).find((p) => normHp(p.no_hp || "") === target) ?? null;
+  const rows = data || [];
+  return (
+    rows.find((p) => digits(p.no_hp || "") === target) ??
+    rows.find((p) => hpMatch(target, p.no_hp || "")) ??
+    null
+  );
 }
 
 /** Login pelanggan hanya dengan nomor HP */
